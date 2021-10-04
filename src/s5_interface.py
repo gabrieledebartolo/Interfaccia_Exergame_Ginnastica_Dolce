@@ -312,14 +312,16 @@ def update_badges():
                     values = list(badges_doc[index].values())
                     badges[keys[0]] = values[0]
 
-        #if len(badges_doc) != 0:    
-            #with open(badges_path,'w') as file:
-                #yaml.dump(badges, file)
+        if len(badges_doc) != 0:    
+            with open(badges_path,'w') as file:
+                yaml.dump(badges, file)
 
 def write_csv():
+    global user_data
     with open(user_data_path, 'w',newline='') as csv_file:
         writer = csv.writer(csv_file)
         writer.writerow(user_data)
+    user_data = []
 
 def load_csv():
     with open(user_data_path) as csv_file:
@@ -340,8 +342,7 @@ def congratulations():
     text_lbl.place_forget()
     camera_lbl.place_forget()
     button_concludi.place_forget()
-
-    #write_csv()
+    #319
 
     no_badge = ""
     if(badge_medal == "none"):
@@ -376,11 +377,11 @@ def terminate_workout():
 
     global user_data
     user_data.append(num_reps)
-    #if len(user_data) != 7:
-        #for i in range(7 - len(user_data)):
-            #user_data.append(0)
+    if len(user_data) != 7:
+        for i in range(7 - len(user_data)):
+            user_data.append(0)
     
-    #write_csv()
+    #319
 
     terminate_image = get_resized_image("src/images/screen_terminate.png",800)
     screen.configure(image=terminate_image)
@@ -460,9 +461,6 @@ def video_stream():
     global loop
     global user_data
 
-    if class_idx != len(classes)-1: #-------------------------------------------------
-        num_reps = num_reps + 1
-
     if(num_reps == tot_reps):
         user_data.append(num_reps)
         update_badges()
@@ -529,7 +527,7 @@ def video_stream():
     camera_lbl.configure(image=pi_camera)
     camera_lbl.place(x=220, y=10)
 
-    reps_lbl.configure(text=str(num_reps)+"/"+str(tot_reps)+"\n"+str(angle))
+    reps_lbl.configure(text=str(num_reps)+"/"+str(tot_reps))
     reps_lbl.place(x = 24, y = 230)
 
     button_concludi.place(x=20, y=397)
@@ -554,10 +552,10 @@ def video_stream():
 
 def countdown():
     global n_countdown
-    milliseconds = 1
+    milliseconds = 5000
     if(n_countdown == 31):
         button_inizia_adesso.place_forget()
-        milliseconds = 100
+        milliseconds = 1000
     if (n_countdown > -2):
         countdown_image = get_resized_image("src/images/countdown_" + str(n_countdown) + ".png",800)
         screen.configure(image=countdown_image)
@@ -590,7 +588,7 @@ def review_schedule(level):
 
 def principiante():
     global tot_reps
-    tot_reps = 1
+    tot_reps = 10
     review_schedule("principiante")
 
 def intermedio():
@@ -749,10 +747,7 @@ def profile_or_workout():
         root.after_cancel(loop)
         congratulazioni = False
     if badge_medal != "none":
-        lbl_badge.place_forget()
-
-    if len(user_data) != 0:
-        user_data = []
+        lbl_badge.place_forget()      
     
     badge_medal = "none"
     button_get_started.place_forget()
