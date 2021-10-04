@@ -35,6 +35,6 @@ python src/s5_interface.py \
 *Link al dataset personalizzato*:  https://drive.google.com/file/d/1g6jBw2GowwCSWbWct0YbORafmxVvfC01/view?usp=sharing
 
 Prima di eseguire il file *s5_interface.py* decomprimere la cartella *src/images*, fondamentale per il funzionamento del sistema.
-Inoltre, è stato modificato il file *config/config.yaml* per permettere l'archivio e il caricamento dei dati dell'utente ed è stato inserito un nuovo file *config/badges.yaml* per tenere traccia dei risultati ottenuti dall'utente nell'utilizzo del sistema (punti esperienza e badge sbloccati).
+Inoltre, è stato modificato il file *config/config.yaml* e inserito un nuovo file *data_proc/user_data.csv* per permettere l'archivio e il caricamento dei dati dell'utente. Infine, è stato creato un nuovo file *config/badges.yaml* per tenere traccia dei risultati ottenuti dall'utente nell'utilizzo del sistema (punti esperienza e badge sbloccati).
 
  
